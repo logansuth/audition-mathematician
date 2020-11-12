@@ -1,0 +1,56 @@
+/* Those with comments were styles written by CS50 staff. */
+
+nav .navbar-brand
+{
+    /* size for brand */
+    font-size: xx-large;
+}
+
+
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+main
+{
+    /* scroll horizontally as needed */
+    overflow-x: auto;
+
+    /* center contents */
+    text-align: center;
+}
+
+main img
+{
+    /* constrain images on small screens */
+    max-width: 100%;
+}
+
+.dictionary
+{
+    display: inline-block;
+    text-align: center;
+    border-style: solid;
+    padding: 35px;
+}
+
+table, th, td
+{
+    border-style: solid;
+    border: 1px solid black;
+}
+
+th, td
+{
+    padding: 10px;
+}
+
+.form-check
+{
+    margin: 10px;
+}
