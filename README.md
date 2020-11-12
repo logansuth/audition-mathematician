@@ -1,7 +1,7 @@
 # audition-mathematician
 Audition Log Flask Web App for Actors
 
-I designed a web application (based partly on a web app developed in a class at Harvard called CS50) that allows actors to log their auditions online and produce statistics about their auditions from that data.  There is also a feature that allows actors to search their audition databases.  They also have the option to edit entries or delete them. The app uses Flask and relies heavily on sqlite 3.
+I designed a web application (based partly on a web app developed in Harvard's CS50 class) that allows actors to log their auditions online and produce statistics about their auditions from that data.  There is also a feature that allows actors to search their audition databases.  They also have the option to edit entries or delete them. The app uses Flask and relies heavily on sqlite 3.
 
 As an actor myself, we get very little information about what's working and what's not. The only real data we have pertains to auditions: How many are we getting? How many are we booking? Etc. We're famously bad at keeping track of what casting offices we've been in for, and which associates work at what offices, etc. This app allows a person to keep track of every audition they go on and produce stats for each audition year, giving the actor a more concrete view of their progress in a career that can frequently feel murky and intangible.
 
