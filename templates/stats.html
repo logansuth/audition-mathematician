@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Stats
+{% endblock %}
+
+{% block main %}
+
+<table style="width:100%" align="center">
+  <thead>
+    <tr>
+      {% for i in range(keys|length) %}
+      <th>{{ keys[i] }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  {% if d|length > 0 %}    
+  {% for i in range(d|length) %}
+  <tr>
+    {% for j in range(keys|length) %}
+    {% if j == 0 %}
+    <td style="font-weight: bold;">
+      <form action="/stats" method="POST">
+        <input id="bookingId" name="bookingId" type="hidden" value="{{ d[i][keys[j]] }}">
+        <button id="booking" name="booking" action="/stats" method="POST" class="btn btn-secondary" type="submit" style="margin: 5px">{{ d[i][keys[j]] }}</button>
+      </form>
+    </td>
+    {% elif d[i][keys[j]] == 0 %}
+    <td></td>
+    {% else %}
+    <td>{{ d[i][keys[j]] }}</td>
+    {% endif %}
+    {% endfor %}
+  </tr>       
+  {% endfor %} 
+</table>
+{% else %}
+<table style="width:100%" align="center">
+  <tr>
+    <td>NO AUDITIONS YET = )</td>
+  </tr>
+</table>
+{% endif %}
+{% endblock %}

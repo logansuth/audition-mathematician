@@ -1,0 +1,190 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Edit
+{% endblock %}
+
+{% block main %}
+<form action="/edit" method="POST">
+  <div class="form-row">
+    <label for="groupDate">Audition date:</label>
+    <div class="form-group" id="groupDate">
+      <select id="selectMonth" class="form-control" name="month" required>
+        <option selected>{{ month }}</option>
+        {% for i in range(1, 13) %}
+        {% if i != month %}
+        <option>{{ i }}</option>
+        {% endif %}
+        {% endfor %}
+      </select>
+      <select id="selectDay" class="form-control" name="day" required>
+        <option selected>{{ day }}</option>
+        {% for i in range(1, 32) %}
+        {% if i != day %}
+        <option>{{ i }}</option>
+        {% endif %}}
+        {% endfor %}
+      </select>
+      <select id="selectYear" class="form-control" name="year" required>
+        <option selected>{{ year }}</option>
+        {% for i in range(2020, 1950, -1) %}
+        {% if i != year %}
+        <option>{{ i }}</option>
+        {% endif %}
+        {% endfor %}
+      </select>
+    </div>
+  </div>  
+  <div class="form-row">
+    <div class="form-group">
+      <label for="inputTitle">Project Title:</label>
+      <input type="text" class="form-control" id="inputTitle" placeholder="Title" name="title" value="{{ title }}" required>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="inputType">Project Type:</label>
+      <select id="inputType" class="form-control" name="type" required>
+        <option selected>{{ type_t }}</option>
+        {% for i in range(types|length) %}
+        {% if types[i] != type_t %}
+        <option>{{ types[i] }}</option>
+        {% endif %}
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="inputRole">Role Type:</label>
+      <select id="inputRole" class="form-control" name="role" required>
+        <option selected>{{ role }}</option>
+        {% for i in range(roles|length) %}
+        {% if roles[i] != role %}
+        <option>{{ roles[i] }}</option>
+        {% endif %}
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="selectCo">Casting Office:</label>
+      <select id="selectCo" class="form-control" name="co">
+        <option selected>{{ co_old }}</option>
+        <option>Enter new:</option>
+        {% for i in range(co|length) %}
+        <option>{{ co[i] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <input type="text" class="form-control" id="inputCo" placeholder="New casting office" name="co_new" disabled>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="selectCd">Casting Director:</label>
+      <select id="selectCd" class="form-control" name="cd">
+        <option selected>{{ cd_old }}</option>
+        <option>Enter new:</option>
+        {% for i in range(cd|length) %}
+        <option>{{ cd[i] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <input type="text" class="form-control" id="inputCd" placeholder="New casting director" name="cd_new" disabled>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="selectCa">Casting Associate:</label>
+      <select id="selectCa" class="form-control" name="ca">
+        <option selected>{{ ca_old }}</option>
+        <option>Enter new:</option>
+        {% for i in range(ca|length) %}
+        <option>{{ ca[i] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <input type="text" class="form-control" id="inputCa" placeholder="New casting associate" name="ca_new" disabled>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-check">
+      {% if cb %}  
+      <input class="form-check-input" type="checkbox" id="checkCb" name="cb" checked="true">
+      {% else %}
+      <input class="form-check-input" type="checkbox" id="checkCb" name="cb">
+      {% endif %}
+      <label class="form-check-label" for="checkCb">
+        Called Back
+      </label>
+    </div>
+    <div class="form-check">
+      {% if booked %}  
+      <input class="form-check-input" type="checkbox" id="checkBooked" name="booked" checked="true">
+      {% else %}
+      <input class="form-check-input" type="checkbox" id="checkBooked" name="booked">
+      {% endif %}
+      <label class="form-check-label" for="checkBooked">
+        Booked
+      </label>
+    </div>
+    <div class="form-check">
+      {% if self_tape %}
+      <input class="form-check-input" type="checkbox" id="checkSelfTape" name="self_tape" checked="true">
+      {% else %}
+      <input class="form-check-input" type="checkbox" id="checkSelfTape" name="self_tape">
+      {% endif %}
+      <label class="form-check-label" for="checkSelfTape">
+        Self-Tape
+      </label>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="notesArea">Notes</label>
+      <textarea class="form-control" id="notesArea" rows="6" name="notes">{{ notes }}</textarea>
+    </div>
+  </div>
+  <div>
+    <input type=hidden name="rowId" id="rowId" value="{{ row_id }}">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<script>
+  document.querySelector("#selectCo").onchange = function() {
+      if (document.querySelector("#selectCo").value == "Enter new:") {
+        document.querySelector("#inputCo").disabled = false;
+      } else {
+        document.querySelector("#inputCo").disabled = true;
+                  }
+    }
+  
+  document.querySelector("#selectCd").onchange = function() {
+    if (document.querySelector("#selectCd").value == "Enter new:") {
+      document.querySelector("#inputCd").disabled = false;
+    } else {
+      document.querySelector("#inputCd").disabled = true;
+                }
+  }
+
+  document.querySelector("#selectCa").onchange = function() {
+      if (document.querySelector("#selectCa").value == "Enter new:") {
+        document.querySelector("#inputCa").disabled = false;
+      } else {
+        document.querySelector("#inputCa").disabled = true;
+                  }
+    }
+</script>
+{% endblock %}

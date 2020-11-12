@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Filtered
+{% endblock %}
+
+{% block main %}
+<table style="width:100%" align="center">
+  {% for i in range(12) %}
+  {% if i != 10 %}
+  <col style="width:5%">
+  {% else %}
+  <col style="width:45%">
+  {% endif %}
+  {% endfor %}
+  <tr>
+    <th>Date</th>
+    <th>Title</th>
+    <th>Type</th>
+    <th>Role</th>
+    <th>Casting Office</th>
+    <th>Casting Director</th>
+    <th>Casting Associate</th>
+    <th>Self-Tape</th>
+    <th>Called Back</th>
+    <th>Booked</th>
+    <th>Notes</th>
+    <th></th>
+  </tr>
+  {% for i in range(r|length) %}
+  <tr>
+    <td >{{ date[i] }}</td>
+    <td style="font-weight: bold">{{ title[i] }}</td>
+    <td>{{ type_t[i] }}</td>
+    <td>{{ role[i] }}</td>
+    {% if co[i] != None %}
+    <td>{{ co[i] }}</td>
+    {% else %}
+    <td></td>
+    {% endif %}
+    {% if cd[i] != None %}
+    <td>{{ cd[i] }}</td>
+    {% else %}
+    <td></td>
+    {% endif %}
+    {% if ca[i] != None %}
+    <td>{{ ca[i] }}</td>
+    {% else %}
+    <td></td>
+    {% endif %}
+    {% if self_tape[i] != None %}
+    <td>X</td>
+    {% else %}
+    <td></td>
+    {% endif %}
+    {% if cb[i] != None %}
+    <td>X</td>
+    {% else %}
+    <td></td>
+    {% endif %}
+    {% if booked[i] != None %}
+    <td>X</td>
+    {% else %}
+    <td></td>
+    {% endif %}
+    {% if notes[i] != None %}
+    <td>{{ notes[i] }}</td>
+    {% else %}
+    <td></td>
+    {% endif %}
+    <td>
+      <form action="/" method="POST">
+        <input id="rowId" name="rowId" type="hidden" value="{{ i }}">
+        <button id="edit" name="edit" class="btn btn-secondary" type="submit" style="margin: 5px">
+          Edit
+        </button>
+      </form>
+      <form action="/delete" method="POST"><input id="deleteId" name="deleteId" type="hidden" value="{{ i }}">
+        <button id="delete" name="delete" class="btn btn-dark" type="submit" style="margin: 5px">
+          Delete
+        </button>
+      </form>
+    </td>
+  </tr>
+  {% else %}
+  <table style="width:100%" align="center">
+    <tr>
+      <td>NO MATCHING AUDITIONS</td>
+    </tr>
+  </table>
+  {% endfor %}
+{% endblock %}
