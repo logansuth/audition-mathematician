@@ -19,3 +19,4 @@ Filter:
 Stats:
     This page filters the data by year and provides totals for each category of audition, allowing the user to see how their audition stats have changed from year to year.  An actor can also click on a year to see a breakdown of how many jobs they booked by category, and what their "booking percentage" is for each.
 
+INSTRUCTIONS:  Once you create a virtual python environment, use command "flask run" to launch the project.
